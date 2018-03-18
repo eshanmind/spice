@@ -497,6 +497,12 @@ class MediumList:
             raise ValueError(constants.INVALID_MEDIUM)
 
         self.load()
+        self.listIter = None
+        
+    def __iter__(self):
+        if self.listIter==None:
+            self.listIter=iter([item for s in [i[1] for i in self.medium_list.items()] for item in s])
+        return self.listIter
 
     def load(self):
         list_soup = self.raw_data
